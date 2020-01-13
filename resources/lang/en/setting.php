@@ -17,4 +17,11 @@ return [
     'create' => 'Rose bakery',
     'text1' => ', made with love for a better web',
     'title1' => 'Cake shop management page',
+    'category' => [
+        'id' => 'ID',
+        'name' => 'Name',
+        'parent' => 'Parent_id',
+        'update' => 'Updated_at',
+        'create' => 'Created_at',
+    ],
 ];

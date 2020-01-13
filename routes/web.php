@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('category', 'admin\CategoryController');
+    Route::resource('cake', 'admin\CakeController');
+    Route::resource('image', 'admin\ImageController');
 });
+
+
+
+

@@ -18,38 +18,50 @@
                         </div>
                     @endif
                     <div class="header">
-                        <h4 class="title">{{ trans('setting.title1_cat') }}</h4>
-                        <a href="{{ route('category.create') }}"><button type="submit" class="btn btn-danger">{{ trans('setting.add_cat') }}</button></a>
+                        <h4 class="title">{{ trans('setting.cake.title') }}</h4>
+                        <a href="{{ route('cake.create') }}">
+                            <button type="submit" class="btn btn-danger">{{ trans('setting.cake.add_product') }}</button>
+                        </a>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Parent</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
+                            <th>{{ trans('setting.cake.id') }}</th>
+                            <th>{{ trans('setting.cake.name') }}</th>
+                            <th>{{ trans('setting.cake.quanity') }}</th>
+                            <th>{{ trans('setting.cake.price') }}</th>
+                            <th>{{ trans('setting.cake.price_sale') }}</th>
+                            <th>{{ trans('setting.cake.img') }}</th>
+                            <th>{{ trans('setting.cake.status') }}</th>
+                            <th>{{ trans('setting.cake.category') }}</th>
+                            <th>{{ trans('setting.action') }}</th>
                             </thead>
                             <tbody>
-                            @foreach ($category as $cate )
+                            @foreach ($cake as $ca )
                                 <tr>
-                                    <td>{{ $cate->id }}</td>
-                                    <td id="cate-{{ $cate['id'] }}-name">{{ $cate->name }}</td>
-                                    <td>{{ $cate->parent_id }}</td>
-                                    <td>{{ date_format($cate->created_at, 'd-m-Y') }}</td>
-                                    <td>{{ date_format($cate->updated_at, 'd-m-Y') }}</td>
+                                    <td>{{ $ca->id }}</td>
+                                    <td id="user-{{ $ca['id'] }}-name">{{ $ca->name }}</td>
+                                    <td>{{ $ca->quanity }}</td>
+                                    <td>{{ $ca->price }}</td>
+                                    <td>{{ $ca->price_sale }}</td>
+                                    <td><img src="{{ asset('upload/user/'. $ca->images->first()->image) }}" alt=""
+                                             height="50px" width="100px"></td>
+                                    <td>{{ $ca->status }}</td>
+                                    <td>{{ $ca->category->name }}</td>
                                     <td class="option">
-                                        <a href="{{ route('category.edit', $cate->id) }}">
+                                        <a href="{{ route('cake.edit', $ca->id) }}">
                                             <button class="font-icon-detail" type="button">
                                                 <i class="pe-7s-pen"></i>
                                                 {{ trans('setting.edit') }}
                                             </button>
                                         </a>
-                                        <button class="font-icon-detail" data-id="{{ $cate->id }}" type="button" onclick="deleteCategory(this);">
+                                        <button class="font-icon-detail" data-id="{{ $ca->id }}" type="button"
+                                                onclick="deleteCake(this);">
                                             <i class="pe-7s-trash"></i>
                                             {{ trans('setting.delete') }}
                                         </button>
-                                        <form class="form-{{ $cate->id }}" action="{{ route('category.destroy', $cate->id) }}" method="POST" style="display: none">
+                                        <form class="form-{{ $ca->id }}" action="{{ route('cake.destroy', $ca->id) }}"
+                                              method="POST" style="display: none">
                                             @csrf
                                             @method('DELETE')
                                         </form>
